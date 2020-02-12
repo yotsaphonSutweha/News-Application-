@@ -1,0 +1,30 @@
+<%= form_for([@user, @profile, @news_report]) do |f| %>
+    <% if @news_report.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@news_report.errors.count, "error")%>
+            prohibited this review from being saved:</h2>
+            <ul>
+                <% @news_report.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+        <div class="field">
+            <p>
+                <%= f.label :title, 'Title' %>
+                <%= f.text_field :title %>
+            </p>
+            <p>
+                <%= f.label :category, 'Category' %>
+                <%= f.text_field :category %>
+            </p>
+            <p>
+                <%= f.label :content, 'Content' %>
+                <%= f.text_field :content %>
+            </p>
+        </div>
+        <div class="actions">
+    <%= f.submit %>
+    </div>
+<% end %>

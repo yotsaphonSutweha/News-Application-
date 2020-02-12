@@ -1,0 +1,40 @@
+<h1>News reports</h1>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Ctegory</th>
+        <th>Content</th>
+    </tr>
+        <% for news_report in @news_reports %>
+        <tr>
+            <td>
+                <%= news_report.title %>
+            </td>
+            <td>
+                <%= news_report.category %>
+            </td>
+            <td>
+                <%= news_report.content %>
+            </td>
+            <td>
+                <%= link_to 'Show', user_profile_news_report_path(@user,        @profile, news_report)
+                %>
+            </td>
+            <td>
+                <%= link_to 'Edit', edit_user_profile_news_report_path(@user,   @profile, news_report)
+                %>
+            </td>
+            <td>
+                <%= link_to 'Destroy', user_profile_news_report_path(@user,   @profile, news_report), :confirm => 'Are you sure?', :method => :delete 
+                %>
+            </td>
+        </tr>
+        <% end %>   
+</table>
+
+<p>
+    <%= link_to 'New report',  new_user_profile_news_report_path(@user, @profile)
+    %>
+</p>
+
+<%= render 'links' %>

@@ -1,0 +1,37 @@
+<h1>Profile in <%= @user.username %></h1>
+<table>
+    <tr>
+        <th>Profile</th>
+        <th>User id</th>
+        <th>First Name</th>
+        <th>Second Name</th>
+        <th>Role</th>
+        <th>Bio</th>
+    </tr>
+    <tr>
+        <td>
+            <%= @profile.user_id %>
+        </td>
+        <td>
+            <%= @profile.fname %>
+        </td>
+        <td>
+            <%= @profile.sname %>
+        </td>
+        <td>
+            <%= @profile.role %>
+        </td>
+        <td>
+            <%= @profile.bio %>
+        </td>
+     
+    </tr>
+</table>
+
+<p>
+    <%= link_to 'New report',  new_user_profile_news_report_path(@user, @profile)
+    %>
+</p>
+
+
+

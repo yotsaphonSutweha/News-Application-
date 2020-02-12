@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comment: MyString
+  createdby: MyString
+  sentiment: MyString
+  profile: one
+
+two:
+  comment: MyString
+  createdby: MyString
+  sentiment: MyString
+  profile: two

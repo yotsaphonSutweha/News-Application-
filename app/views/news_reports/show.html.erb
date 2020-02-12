@@ -1,0 +1,51 @@
+<h1>Report title in <%= @news_report.title %></h1>
+<table>
+    <tr>
+        <th>Category</th>
+        <th>Content</th>
+    </tr>
+    <tr>
+        <td>
+            <%= @news_report.category %>
+        </td>
+        <td>
+            <%= @news_report.content %>
+        </td> 
+        <td>
+            <% if @comments%>
+                <% for @comment in @comments %>
+                    <ul>
+                        <li><%= @comment.comment %></li>
+                        <li><%= @comment.sentiment %></li>
+                        <li><%= @comment.createdby %></li>
+                        <p>
+                            <%= link_to 'Delete', user_profile_news_report_comment_url(@user,   @profile, @news_report, @comment), :confirm => 'Are you sure?', :method => :delete 
+                            %>
+                        </p>
+                        <p>
+                            <%= link_to 'Edit', edit_user_profile_news_report_comment_url(@user,   @profile, @news_report, @comment)
+                            %>
+                        </p>
+                    </ul>
+                <% end %>
+            <% end %>
+        </td>
+    </tr>
+</table>
+
+<%= form_tag( user_profile_news_report_comments_url(@user, @profile, @news_report), method: "post") do %>
+    <%= label_tag(:user_comment, "Comment:") %>
+    <%= text_field_tag(:user_comment) %>
+    <%= submit_tag("Save") %>
+<% end %>
+
+<p>
+    <%= link_to 'Back',  user_profile_news_reports_path %>
+</p>
+
+<p>
+    <%= link_to 'Edit', edit_user_profile_news_report_path(@user,   @profile, @news_report)
+    %>
+</p>
+
+<%= render 'links' %>
