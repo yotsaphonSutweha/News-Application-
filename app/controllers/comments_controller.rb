@@ -36,11 +36,9 @@ class CommentsController < ApplicationController
     @user = User.find(params[:user_id])
     @profile = @user.profile
     @news_report = NewsReport.find(params[:news_report_id])
-    @comment = @news_report.find(params[:id])
-    if @comment.update_attributes(params.require(:comment).permit(:comment))
+    @comment = @news_report.comments.find(params[:id])
+    if @comment.update(comment: params[:user_comment])
       redirect_to user_profile_news_report_url(@user, @profile, @news_report)
-    else
-      render :action => "edit"
-    end
+    end 
   end
 end

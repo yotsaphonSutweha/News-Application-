@@ -1,6 +1,6 @@
-<h1 class="heading">Your reports</h1>
-<% if @news_reports %>
-    <div class="row">
+<h1 class="heading">News reports</h1>
+<div class="row">
+    <% if @news_reports %>
         <% for news_report in @news_reports %>
         <div class="col-lg-4 card-wrapper"> 
             <div class="card" style="width: 18rem;">
@@ -16,7 +16,8 @@
                 </div>
             </div>
         </div>
-    <% end %>   
+        <% end %>   
+    <% else %>
+        <h1>No news</h1>
+    <% end %>
 </div>
-<% end %>
-

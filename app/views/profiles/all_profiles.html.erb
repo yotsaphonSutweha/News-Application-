@@ -1,0 +1,24 @@
+<h1 class="heading">Profiles</h1>
+<% if @profiles %>
+    <div class="row">
+        <% for profile in @profiles %>
+        <div class="col-lg-6 card-wrapper"> 
+            <div class="card style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="https://picsum.photos/id/212/200/300" class="card-img">
+                    </div>
+                    <div class="col-md-8"> 
+                        <div class="card-body">
+                            <h5 class="card-title"><%= profile.fname %>  <%= profile.sname %></h5>
+                            <h6 class="card-subtitle"><b>Role:</b> <%= profile.role %></h6><br/>
+                            <p><%= profile.bio %></p>
+                            <%= link_to 'Follow' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>   
+</div>
+<% end %>

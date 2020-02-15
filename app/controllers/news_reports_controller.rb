@@ -56,4 +56,8 @@ class NewsReportsController < ApplicationController
       format.xml { head :ok }
     end
   end
+
+  def all_reports
+    @news_reports = NewsReport.order(created_at: :desc)
+  end
 end

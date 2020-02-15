@@ -1,30 +1,21 @@
-<h1>Profile in <%= @user.username %></h1>
-<table>
-    <tr>
-        <th>Profile</th>
-        <th>User id</th>
-        <th>First Name</th>
-        <th>Second Name</th>
-        <th>Role</th>
-        <th>Bio</th>
-    </tr>
-    <tr>
-        <td>
-            <%= @profile.user_id %>
-        </td>
-        <td>
-            <%= @profile.fname %>
-        </td>
-        <td>
-            <%= @profile.sname %>
-        </td>
-        <td>
-            <%= @profile.role %>
-        </td>
-        <td>
-            <%= @profile.bio %>
-        </td>
-     
-    </tr>
-</table>
+<h1 class="heading"><%= @user.username %></h1>
+<div>
+    <h4><%= @profile.fname %>   <%= @profile.sname %></h4>
+    <h5><%= @profile.role %></h5>
+</div>
+<div>
+    <p>Bio:</p>
+    <p>
+        <%= @profile.bio %>
+    </p>
+    <div class="row">
+        <div class="col-lg-1"> 
+            <%= link_to 'Edit', edit_user_profile_url(@user, @profile), class: 'nav-link custom-nav'%>
+        </div>
+        <div class="col-lg-2"> 
+            <%= link_to 'Delete', user_profile_url(@user, @profile), method: :delete, class: 'nav-link custom-nav'%>
+        </div>
+    </div>
+</div>
+
 

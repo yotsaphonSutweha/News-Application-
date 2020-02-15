@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   get 'profile/new'
   get 'profile/edit'
   resources :users do
-    resources :profiles do 
-      resources :news_reports do 
+    resources :profiles do
+      resources :news_reports do
         resources :comments
       end
     end
@@ -26,4 +26,7 @@ Rails.application.routes.draw do
   # resources :news_writers
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/news', :controller=>'news', :action=>'get_news'
+  get '/newsreports', :controller=>'news_reports', :action=>'all_reports'
+  get '/newswriters', :controller=>'profiles', :action=>'all_profiles'
+  get '/search', :controller=>'news', :action=>'search_news'
 end

@@ -5,6 +5,10 @@ class ProfilesController < ApplicationController
     @profile = @user.profile
   end
 
+  def all_profiles
+    @profiles = Profile.order(created_at: :desc)
+  end
+
   def show 
     @user = User.find(params[:user_id])
     @profile = @user.profile
@@ -30,15 +34,15 @@ class ProfilesController < ApplicationController
   #GET 
   def edit 
     @user = User.find(params[:user_id])
-    @profile = @user.profile.find(params[:id])
+    @profile = Profile.find(params[:id])
   end
 
   #PUT /users/1/profile/1
   def update
     @user = User.find(params[:user_id])
-    @profile = Profile.first()
+    @profile = Profile.find(params[:id])
     if @profile.update_attributes(params.require(:profile).permit(:fname, :sname, :bio, :role))
-      redirect_to user_profile_path(@user, @profile)
+      redirect_to user_profiles_path(@user, @profile)
     else 
       render :action => "edit"
     end

@@ -10,21 +10,22 @@
             </ul>
         </div>
         <% end %>
-        <div class="field">
-            <p>
+        <div class="form-row">
+            <div class="form-group col-md-8">
                 <%= f.label :title, 'Title' %>
-                <%= f.text_field :title %>
-            </p>
-            <p>
+                <%= f.text_field :title , class: 'form-control'%>
+            </div>
+            <div class="form-group col-md-4">
                 <%= f.label :category, 'Category' %>
-                <%= f.text_field :category %>
-            </p>
-            <p>
-                <%= f.label :content, 'Content' %>
-                <%= f.text_field :content %>
-            </p>
+                <%= f.text_field :category, class: 'form-control'%>
+            </div>
         </div>
-        <div class="actions">
-    <%= f.submit %>
+        <div class="form-group">
+            <%= f.label :content, 'Content' %>
+            <%= f.text_area :content, class: 'form-control', rows: '20'%>
+        </div>
+        <div class="form-group">
+            <%= f.submit ('Create'), class: 'btn btn-primary' %>
+        </div>
     </div>
 <% end %>

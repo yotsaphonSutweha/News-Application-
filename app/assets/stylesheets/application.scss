@@ -15,10 +15,87 @@
 .navbar {
     background-color: #ff413b;
 }
-a {
+.nav-link  {
     color: white;
+}
+
+.custom-nav {
+    background-color:#ffdb58;
+    color:#ff413b;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.custom-nav:hover {
+    background-color:#ff413b;
+    color: #ffdb58;
 }
 
 a:hover {
     color: #333;
+    text-decoration: none;
+}
+
+.card-wrapper {
+    padding-top: 50px;
+}
+
+.card {
+    border-radius: 10px;
+    border-color: #ffdb58;
+    a {
+        color:  #ffdb58;
+    }
+    a:hover {
+        color: #ff413b;
+    }
+}
+.btn-primary {
+    background-color: #ff413b;
+    border-color: #ff413b;
+    :hover {
+        color: #ff413b;
+    }
+}
+
+.heading {
+    padding-top: 50px;
+}
+
+.comment-section {
+    padding: 20px 60px;
+}
+
+.comment-input-section {
+    padding-top: 50px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.comment-cards {
+    border-radius: 0;
+    border-color: white;
+    border-bottom: 3px solid #ff413b;
+}
+
+.comment-buttons {
+  border-color: #ff413b;
+}
+
+.comment-btn {
+    background-color:#ffdb58;
+    color:#ff413b;
+    border-radius: 6px;
+    text-align: center;
+    border-color: #ffdb58;
+}
+
+.comment-btn:hover {
+    background-color:#ff413b;
+    color: #ffdb58;
+}
+
+
+.profile-card {
+   padding-top: 50px;
 }
