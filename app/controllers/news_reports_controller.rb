@@ -20,8 +20,10 @@ class NewsReportsController < ApplicationController
 
   def create 
     @user = User.find(params[:user_id])
+    @createdby = @user.username
     @profile = @user.profile
     @news_report = @profile.news_reports.build(params.require(:news_report).permit(:title, :category, :content))
+    @news_report.createdby = @createdby
     if @news_report.save
       redirect_to user_profile_news_report_url(@user, @profile, @news_report)
     else 

@@ -19,10 +19,11 @@ class CommentsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    @username = @user.username
     @profile = @user.profile
     @news_report = NewsReport.find(params[:news_report_id])
     @user_comment = params[:user_comment]
-    @comment = Comment.new(comment: @user_comment, createdby: @profile.fname + ' ' + @profile.sname, sentiment: "Positive", profile: @profile, news_report: @news_report)
+    @comment = Comment.new(comment: @user_comment, createdby: @username, sentiment: "Positive", profile: @profile, news_report: @news_report)
     if @comment.save 
       redirect_to user_profile_news_report_url(@user, @profile, @news_report)
     else

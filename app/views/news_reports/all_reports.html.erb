@@ -10,9 +10,11 @@
                     <p><%= news_report.content[0..150].gsub(/\s\w+\s*$/,'...') %></p>
                     <%= link_to 'Read more', user_profile_news_report_url(Profile.find(news_report.profile.id).user_id, news_report.profile, news_report)
                     %>
-                    <footer class="blockquote-footer">
-                        <cite>Written by: Yotsaphon Sutweha</cite>
-                    </footer>
+                    <% if news_report.createdby %>
+                        <footer class="blockquote-footer">
+                            <cite><%= news_report.createdby %></cite>
+                        </footer>
+                    <% end %>
                 </div>
             </div>
         </div>
