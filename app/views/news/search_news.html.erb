@@ -13,6 +13,28 @@
       </div>
     <% end %>
   </div>
+  <% if @news_reports %>
+    <div class="row">
+      <% for news_report in @news_reports %> 
+        <div class="col-lg-4 card-wrapper"> 
+          <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                  <h5 class="card-title"><b>Title:</b> <%= news_report.title %></h5>
+                  <h6 class="card-subtitle"><b>Category:</b> <%= news_report.category %></h6><br/>
+                  <p><%= news_report.content[0..150].gsub(/\s\w+\s*$/,'...') %></p>
+                  <%= link_to 'Read more', user_profile_news_report_url(Profile.find(news_report.profile.id).user_id, news_report.profile, news_report)
+                  %>
+                  <% if news_report.createdby %>
+                      <footer class="blockquote-footer">
+                          <cite><%= news_report.createdby %></cite>
+                      </footer>
+                  <% end %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>   
 
   <% @news["newsApiSearchResponse"]["articles"].each do |content| %>
     <div class="card-content-container"> 

@@ -1,4 +1,7 @@
+require('sentimentanalyzer')
+
 class ProfilesController < ApplicationController
+  SentimentAnalyzer.loadProfaneWords(Rails.root.join('lib/word_bank/bad-words.csv'))
   # GET /users/1/profile
   def index
     @user = User.find(params[:user_id])
@@ -24,10 +27,14 @@ class ProfilesController < ApplicationController
   def create 
     @user = User.find(params[:user_id])
     @profile = @user.build_profile(params.require(:profile).permit(:fname, :sname, :bio, :role))
-    if @profile.save
-      redirect_to user_profile_path(@user, @profile)
+    if SentimentAnalyzer.profaneWordsFilter(@profile.fname) == true && SentimentAnalyzer.profaneWordsFilter(@profile.sname) == true && SentimentAnalyzer.profaneWordsFilter(@profile.bio) == true
+      if @profile.save
+        redirect_to user_profile_path(@user, @profile)
+      else 
+        render :action => "new"
+      end
     else 
-      render :action => "new"
+      redirect_to new_user_profile_url(@user), flash: { alert: "Offensive language is forbidden!" }
     end
   end
 
@@ -41,10 +48,17 @@ class ProfilesController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @profile = Profile.find(params[:id])
-    if @profile.update_attributes(params.require(:profile).permit(:fname, :sname, :bio, :role))
-      redirect_to user_profiles_path(@user, @profile)
+    @current_user = User.find(session["warden.user.user.key"][0][0])
+    @current_profile = @current_user.profile
+
+    if SentimentAnalyzer.profaneWordsFilter(params.require(:profile).permit(:fname)) == true && SentimentAnalyzer.profaneWordsFilter(params.require(:profile).permit(:sname)) == true && SentimentAnalyzer.profaneWordsFilter(params.require(:profile).permit(:bio)) == true
+      if @current_profile.update_attributes(params.require(:profile).permit(:fname, :sname, :bio))
+        redirect_to user_profiles_path(@current_user, @current_profile)
+      else 
+        redirect_to edit_user_profile_url(@current_user, @current_profile), flash: { alert: "Cannot update profile details due to internal error" }
+      end
     else 
-      render :action => "edit"
+      redirect_to edit_user_profile(@current_user, @current_profile), flash: { alert: "Offensive language is forbidden!" }
     end
   end
 end

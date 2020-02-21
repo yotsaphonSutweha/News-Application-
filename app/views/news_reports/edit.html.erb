@@ -1,2 +1,34 @@
 <h1 class="heading">Edit News report</h1>
-<%= render 'form' %>
+
+<%= form_tag(user_profile_news_report_url(@user, @profile, params[:id], @news_report),  method: "put") do %>
+    <% if @news_report.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@news_report.errors.count, "error")%>
+            prohibited this review from being saved:</h2>
+            <ul>
+                <% @news_report.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <%= label :title, 'Title' %>
+                <%= text_field :title , class: 'form-control'%>
+            </div>
+            <div class="form-group col-md-4">
+                <%= label :category, 'Category' %>
+                <%= text_field :category, class: 'form-control'%>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= label :content, 'Content' %>
+            <%= text_area :content, class: 'form-control', rows: '20'%>
+        </div>
+        <div class="form-group">
+            <%= submit_tag ('Create'), class: 'btn btn-primary' %>
+        </div>
+    </div>
+<% end %>
+

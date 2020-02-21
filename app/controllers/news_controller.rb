@@ -10,6 +10,6 @@ class NewsController < ApplicationController
     def search_news 
         @search_value = params[:search_value]
         @news = BreakingNewsApis.instance.search(@search_value)
-        puts @news
+        @news_reports = NewsReport.where({ category: @search_value})
     end
 end

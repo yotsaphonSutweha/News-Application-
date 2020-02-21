@@ -7,15 +7,17 @@
     <p>
         <%= @news_report.content %>
     </p>
-    <div class="row">
-        <div class="col-lg-1"> 
-            <%= link_to 'Edit', edit_user_profile_news_report_path(@user,   @profile, @news_report), class: 'nav-link custom-nav'%>
-        </div>
+    <% if @current_profile_id == @news_report.profile_id %>
+        <div class="row">
+            <div class="col-lg-1"> 
+                <%= link_to 'Edit', edit_user_profile_news_report_path(@user,   @profile, @news_report), class: 'nav-link custom-nav'%>
+            </div>
 
-        <div class="col-lg-2"> 
-            <%= link_to 'Delete', user_profile_news_report_url, method: :delete, class: 'nav-link custom-nav'%>
+            <div class="col-lg-2"> 
+                <%= link_to 'Delete', user_profile_news_report_url, method: :delete, class: 'nav-link custom-nav'%>
+            </div>
         </div>
-    </div>
+    <% end %>
 </div>
 <div class="comment-input-section">
     <%= form_tag(user_profile_news_report_comments_url(@user, @profile, @news_report), method: "post") do %>
@@ -35,45 +37,27 @@
             <div class="card comment-cards">
                 <div class="card-body">
                     <p><%= @comment.comment %></p>
-                    <p>Sentiment: <%= @comment.sentiment %></p>
+                    <% if @comment.sentiment == 'Positive'%>
+                        <p>Sentiment: &#128516;</p>
+                    <% elsif @comment.sentiment == 'Negative' %>
+                        <p>Sentiment: &#129324;</p>
+                    <% elsif @comment.sentiment == 'Neutral' %>
+                        <p>Sentiment: &#128566;</p>
+                    <% end %>
                     <p>Posted by: <%= @comment.createdby %></p>
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="edit-btn">
-                                Edit
-                            </button>
-                            <div class="modal fade" id="as" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <%= form_tag(user_profile_news_report_comment_url(@user, @profile, @news_report, @comment), method: "put") do %>
-                                            <%= text_area_tag :user_comment, rows='10', class: 'form-control' %>
-                                            <%= submit_tag("comment", class: 'form-control edit-comment-btn')%>
-                                        <% end %>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                                </div>
+                    <% if @current_profile_id == @comment.profile_id %>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <%= link_to 'Edit' ,edit_user_profile_news_report_comment_url(@user, @profile, @news_report, @comment), class: 'nav-link'%>
+                            </div>
+                            <div class="col-lg-2 ">
+                                <%= link_to 'Delete', user_profile_news_report_comment_url(@user, @profile, @news_report, @comment), :confirm => 'Are you sure?', :method => :delete, class: 'nav-link comment-buttons'%>
                             </div>
                         </div>
-                        <div class="col-lg-2 ">
-                            <%= link_to 'Delete', user_profile_news_report_comment_url(@user, @profile, @news_report, @comment), :confirm => 'Are you sure?', :method => :delete, class: 'nav-link comment-buttons'%>
-                        </div>
-                    </div>
+                    <% end %>
                 </div>
             </div>
-        </div>
+        </div>  
     <% end %>
 <% end %>
-
-
-
 

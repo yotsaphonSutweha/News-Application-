@@ -11,9 +11,7 @@ class User < ApplicationRecord
     #     (?=.*[A-Z]) # Contain at least one uppercase character
     # /x
 
-    # has_one :profile
-    # validates :username, presence: true, uniqueness: true, length: {maximum: 15}
-    # validates :password, presence: true, confirmation: true, format: PASSWORD_REQUIREMENTS
-    # validates :password_confirmation, presence: true
+    # validates :username, presence: true, length: {maximum: 15}
+    # validates :encrypted_password, presence: true, confirmation: true
     # validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}
 end
