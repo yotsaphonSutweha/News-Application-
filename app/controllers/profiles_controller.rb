@@ -48,17 +48,13 @@ class ProfilesController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @profile = Profile.find(params[:id])
+
     @current_user = User.find(session["warden.user.user.key"][0][0])
     @current_profile = @current_user.profile
-
-    if SentimentAnalyzer.profaneWordsFilter(params.require(:profile).permit(:fname)) == true && SentimentAnalyzer.profaneWordsFilter(params.require(:profile).permit(:sname)) == true && SentimentAnalyzer.profaneWordsFilter(params.require(:profile).permit(:bio)) == true
-      if @current_profile.update_attributes(params.require(:profile).permit(:fname, :sname, :bio))
-        redirect_to user_profiles_path(@current_user, @current_profile)
-      else 
-        redirect_to edit_user_profile_url(@current_user, @current_profile), flash: { alert: "Cannot update profile details due to internal error" }
-      end
+    if @current_profile.update_attributes(params.require(:profile).permit(:fname, :sname, :bio))
+      redirect_to user_profiles_path(@current_user, @current_profile)
     else 
-      redirect_to edit_user_profile(@current_user, @current_profile), flash: { alert: "Offensive language is forbidden!" }
+      redirect_to edit_user_profile_url(@current_user, @current_profile), flash: { alert: "Cannot update profile details due to internal error" }
     end
   end
 end

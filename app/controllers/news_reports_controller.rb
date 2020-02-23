@@ -59,17 +59,21 @@ class NewsReportsController < ApplicationController
     @profile = @user.profile
     @current_user = User.find(session["warden.user.user.key"][0][0])
     @current_profile = @current_user.profile
-    @news_report = @current_profile.news_reports.build
+    @news_report = @current_profile.news_reports.find(params[:id])
   end
 
   def update 
     @user = User.find(params[:user_id])
     @profile = @user.profile
-
-    # @current_user = User.find(session["warden.user.user.key"][0][0])
-    # @current_profile = @current_user.profile
-    @news_report = @profile.news_reports.find(params[:id])
+    @current_user = User.find(session["warden.user.user.key"][0][0])
+    @current_profile = @current_user.profile
+    @title = params[:title]
+    @category = params[:category]
+    @content = params[:content]
+    @news_report = @current_profile.news_reports.find(params[:id])
+    @createdby = @news_report.createdby
     if @news_report.update_attributes(params.require(:news_report).permit(:title, :category, :content))
+      @news_report.createdby = @createdby
       redirect_to user_profile_news_report_url
     else 
       render :action => "edit"

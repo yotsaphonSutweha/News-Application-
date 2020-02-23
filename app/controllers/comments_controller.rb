@@ -9,7 +9,6 @@ class CommentsController < ApplicationController
     
   end
 
-
   def destroy
     @user = User.find(params[:user_id])
     @profile = @user.profile
@@ -49,7 +48,6 @@ class CommentsController < ApplicationController
     @profile = @user.profile
     @news_report = NewsReport.find(params[:news_report_id])
     @comment = @news_report.comments.find(params[:id])
-
     @user_comment = params[:user_comment]
     if SentimentAnalyzer.profaneWordsFilter(@user_comment) == true
       @sentiment = SentimentAnalyzer.commentSentimentAnalyzer(@user_comment)

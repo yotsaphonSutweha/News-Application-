@@ -4,5 +4,4 @@ class NewsReport < ApplicationRecord
   validates :title, presence: true, length: { maximum: 100, too_long: "%{count}characters are allowed" }
   validates :category, presence: true
   validates :content, presence: true
-  validates :createdby, presence: true
 end

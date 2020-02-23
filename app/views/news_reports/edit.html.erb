@@ -1,6 +1,5 @@
-<h1 class="heading">Edit News report</h1>
-
-<%= form_tag(user_profile_news_report_url(@user, @profile, params[:id], @news_report),  method: "put") do %>
+<h1 class="heading">Edit news report</h1>
+<%= form_for :news_report, url: user_profile_news_report_url(@current_user, @current_profile, @news_report), method: :put do |f| %>
     <% if @news_report.errors.any? %>
         <div id="error_explanation">
             <h2><%= pluralize(@news_report.errors.count, "error")%>
@@ -14,21 +13,20 @@
         <% end %>
         <div class="form-row">
             <div class="form-group col-md-8">
-                <%= label :title, 'Title' %>
-                <%= text_field :title , class: 'form-control'%>
+                <%= f.label :title, 'Title' %>
+                <%= f.text_field :title , class: 'form-control'%>
             </div>
             <div class="form-group col-md-4">
-                <%= label :category, 'Category' %>
-                <%= text_field :category, class: 'form-control'%>
+                <%= f.label :category, 'Category' %>
+                <%= f.text_field :category, class: 'form-control'%>
             </div>
         </div>
         <div class="form-group">
-            <%= label :content, 'Content' %>
-            <%= text_area :content, class: 'form-control', rows: '20'%>
+            <%= f.label :content, 'Content' %>
+            <%= f.text_area :content, class: 'form-control', rows: '20'%>
         </div>
         <div class="form-group">
-            <%= submit_tag ('Create'), class: 'btn btn-primary' %>
+            <%= f.submit ('Edit'), class: 'btn btn-primary' %>
         </div>
     </div>
 <% end %>
-
