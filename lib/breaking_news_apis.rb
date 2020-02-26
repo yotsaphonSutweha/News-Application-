@@ -43,6 +43,16 @@ class BreakingNewsApis
         return @responseBody
     end
 
+    def calling_news_api_recommendation(searchValue)
+        if searchValue != ''
+            @url = 'https://newsapi.org/v2/top-headlines?source=bbc-news&pageSize=5&q=' + searchValue + '&apiKey=1eaff84b12f24c50a65899494f406fb3'
+            @req = open(@url)
+            @responseBody = @req.read
+            @responseBody = JSON.parse(@responseBody)
+            return @responseBody
+        end
+    end
+
     def get_news
         @searchValue = ''
         @newsApiResponse = calling_news_api(@searchValue)
@@ -66,4 +76,14 @@ class BreakingNewsApis
         @combinedResponse = JSON[@combinedResponse]
         return @combinedResponse
     end
+
+    def recommendation(previousSearch)
+        @searchValue = previousSearch
+        @newsApiResponse = calling_news_api_recommendation(@searchValue)
+        @responseHash = {"newsApiRecommendationResponse" => @newsApiResponse}
+        @responseBody = JSON.generate(@responseHash)
+        @responseBody = JSON[@responseBody]
+        return @responseBody
+    end
 end
+

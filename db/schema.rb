@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_16_220513) do
+ActiveRecord::Schema.define(version: 2020_02_26_104342) do
 
   create_table "comments", force: :cascade do |t|
     t.string "comment"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 2020_02_16_220513) do
     t.integer "news_report_id"
     t.index ["news_report_id"], name: "index_comments_on_news_report_id"
     t.index ["profile_id"], name: "index_comments_on_profile_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.string "followee_id"
+    t.integer "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_follows_on_profile_id"
   end
 
   create_table "news_reports", force: :cascade do |t|
@@ -52,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_02_16_220513) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "no_of_followers"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

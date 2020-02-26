@@ -12,8 +12,15 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= profile.fname %>  <%= profile.sname %></h5>
                             <h6 class="card-subtitle"><b>Role:</b> <%= profile.role %></h6><br/>
+                            <p>Followers: <%= profile.no_of_followers %></p>
                             <p><%= profile.bio %></p>
-                            <%= link_to 'Follow' %>
+                            <% if @current_profile.id != profile.id %>
+                                <% if @followed_profile_ids.include? profile.id.to_s %>
+                                   <p>Followed</p>
+                                <% else %>
+                                    <%= link_to 'Follow', follow_url(:following_id => profile.id )%>
+                                <% end %>
+                            <% end %>
                         </div>
                     </div>
                 </div>

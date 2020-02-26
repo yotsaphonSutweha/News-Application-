@@ -1,5 +1,6 @@
 class Profile < ApplicationRecord
     belongs_to :user
+    has_many :follows
     has_many :news_reports
     validates :fname, presence: true
     validates :sname, presence: true

@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   get '/newsreports', :controller=>'news_reports', :action=>'all_reports'
   get '/newswriters', :controller=>'profiles', :action=>'all_profiles'
   get '/search', :controller=>'news', :action=>'search_news'
+  get '/follow', :controller=>'follow', :action=>'following'
+  get '/favourites', :controller=>'favourites', :action=>'my_favourites'
 end

@@ -9,7 +9,14 @@ class ProfilesController < ApplicationController
   end
 
   def all_profiles
+    @current_user = User.find(session["warden.user.user.key"][0][0])
+    @current_profile = @current_user.profile
     @profiles = Profile.order(created_at: :desc)
+    @followed_profiles = @current_profile.follows
+    @followed_profile_ids = Array.new 
+    @followed_profiles.each do | followed_profile |
+      @followed_profile_ids << followed_profile.followee_id
+    end
   end
 
   def show 
@@ -28,8 +35,9 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:user_id])
     @profile = @user.build_profile(params.require(:profile).permit(:fname, :sname, :bio, :role))
     if SentimentAnalyzer.profaneWordsFilter(@profile.fname) == true && SentimentAnalyzer.profaneWordsFilter(@profile.sname) == true && SentimentAnalyzer.profaneWordsFilter(@profile.bio) == true
+      @profile.no_of_followers = 0
       if @profile.save
-        redirect_to user_profile_path(@user, @profile)
+        redirect_to user_profiles_url(@user)
       else 
         render :action => "new"
       end
