@@ -16,7 +16,7 @@
                             <p><%= profile.bio %></p>
                             <% if @current_profile.id != profile.id %>
                                 <% if @followed_profile_ids.include? profile.id.to_s %>
-                                   <p>Followed</p>
+                                   <p style="color: #ff6458;">Followed</p>
                                 <% else %>
                                     <%= link_to 'Follow', follow_url(:following_id => profile.id )%>
                                 <% end %>

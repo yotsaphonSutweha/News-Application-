@@ -19,11 +19,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def show 
-    @user = User.find(params[:user_id])
-    @profile = @user.profile
-  end
-
   #GET /users/1/profile/new
   def new
       @user = User.find(params[:user_id])

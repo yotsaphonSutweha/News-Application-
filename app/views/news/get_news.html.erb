@@ -18,54 +18,19 @@
     <% if @previous_search != '' %>
       <h3>Becuase you viewed: <%= @previous_search %> </h3>
       <% @recommended_news["newsApiRecommendationResponse"]["articles"].each do |content| %>
-        <div class="card-content-container"> 
-          <div class="card">
-            <div class="card-header">  
-              <h5><%= content["title"] %></h5>
-              <h6>- <%= content["source"]["name"] %></h6>
-            </div>
-            <div class="card-body"> 
-              <p><%= content["description"] %></p>
-              <p><%= content["publishedAt"] %></p>
-              <a href=<%= content["url"] %> class="btn btn-primary">Link</a>
-            </div>
-          </div>
-        </div>
+        <%= render partial: 'news_api', locals:{content: content}%>
       <% end %>
     <% end %>
   </div>
 
   <h3>Daily news</h3>
+  
   <% @news["newsApiResponse"]["articles"].each do |content| %>
-    <div class="card-content-container"> 
-      <div class="card">
-        <div class="card-header">  
-          <h5><%= content["title"] %></h5>
-          <h6>- <%= content["source"]["name"] %></h6>
-        </div>
-        <div class="card-body"> 
-          <p><%= content["description"] %></p>
-          <p><%= content["publishedAt"] %></p>
-          <a href=<%= content["url"] %> class="btn btn-primary">Link</a>
-        </div>
-      </div>
-    </div>
+    <%= render partial: 'news_api', locals:{content: content}%>
   <% end %>
 
   <% @news["guardianApiResponse"]["response"]["results"].each do |content| %>
-    <div class="card-content-container">
-      <div class="card">
-        <div class="card-header">
-          <h5><%= content["webTitle"]%></h5>
-        </div>
-        <div class="card-body"> 
-          <p><%= content["type"]%></p>
-          <p><%= content["sectionName"]%></p>
-          <p><%= content["webPublicationDate"]%></p>
-          <a href=<%= content["webUrl"] %> class="btn btn-primary">Link</a>
-        </div>
-      </div>
-    </div>
+    <%= render partial: 'guardian_api', locals:{content: content}%>
   <% end %>
 </div>
 

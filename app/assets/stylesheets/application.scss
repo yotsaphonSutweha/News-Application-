@@ -12,10 +12,13 @@
  */
  @import "bootstrap";
 
-.navbar {
+.navbar-custom{
     background-color: #ff413b;
 }
 .nav-link  {
+    color: white;
+}
+.navbar-toggler-icon {
     color: white;
 }
 
@@ -36,9 +39,17 @@ a:hover {
     text-decoration: none;
 }
 
+.custom-toggler.navbar-toggler-icon {
+    background-image: image-url("hamburger.png")
+  }
+
 .card-wrapper {
     padding-top: 50px;
 }
+
+.custom-toggler.navbar-toggler {
+    border-color: #ffdb58;
+  } 
 
 .card {
     border-radius: 10px;
@@ -99,3 +110,6 @@ a:hover {
    padding-top: 50px;
 }
 
+.cancel-btn {
+    font-size: 16px;
+}

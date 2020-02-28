@@ -1,0 +1,30 @@
+<% if comments %>
+    <% for comment in comments %>
+        <div class="comment-section">
+            <div class="card comment-cards">
+                <div class="card-body">
+                    <p><%= comment.comment %></p>
+                    <% if comment.sentiment == 'Positive'%>
+                        <p>Sentiment: &#128516;</p>
+                    <% elsif comment.sentiment == 'Negative' %>
+                        <p>Sentiment: &#129324;</p>
+                    <% elsif comment.sentiment == 'Neutral' %>
+                        <p>Sentiment: &#128566;</p>
+                    <% end %>
+                    <p>Posted by: <%= comment.createdby %></p>
+                    <% if current_profile_id == comment.profile_id %>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <%= link_to 'Edit' ,edit_user_profile_news_report_comment_url(@user, @profile, @news_report, comment), class: 'nav-link'%>
+                            </div>
+                            <div class="col-lg-2 ">
+                                <%= link_to 'Delete', user_profile_news_report_comment_url(@user, @profile, @news_report, comment), :confirm => 'Are you sure?', :method => :delete, class: 'nav-link comment-buttons'%>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>  
+    <% end %>
+<% end %>
+

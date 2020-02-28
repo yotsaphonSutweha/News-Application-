@@ -1,0 +1,13 @@
+<div class="card-content-container"> 
+  <div class="card">
+    <div class="card-header">  
+      <h5><%= content["title"] %></h5>
+      <h6>- <%= content["source"]["name"] %></h6>
+    </div>
+    <div class="card-body"> 
+      <p><%= content["description"] %></p>
+      <p><%= content["publishedAt"] %></p>
+      <a href=<%= content["url"] %> class="btn btn-primary">Link</a>
+    </div>
+  </div>
+</div>
