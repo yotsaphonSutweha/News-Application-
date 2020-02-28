@@ -253,7 +253,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 5.0)
   selenium-webdriver
-  sentimentanalyzer (~> 0.1.3)
+  sentimentanalyzer
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
