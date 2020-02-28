@@ -1,7 +1,24 @@
-<h1>Pages#home</h1>
-<% if current_user %>
-    <%= link_to 'Sing out', destroy_user_session_path, method: :delete %>
-<% else %>
-    <%= link_to 'Sign up', new_user_registration_path %>
-    <%= link_to 'Sign in', new_user_session_path %>
-<% end %> 
+<h1 class="heading">Welcome to News Social Media</h1>
+    <div class="row landing-page-wrapper">
+        <div class="col-lg-4 landing-page-text">
+            <%= image_tag("newspaper.png", :alt => "rss feed") %>
+            <div class="landing-page-content-wrapper">
+                <h5>Breaking news</h5>
+                <p>Stay up to date with what is going on around the world two popular news API</p>
+            </div>
+        </div>
+        <div class="col-lg-4 landing-page-text">
+            <%= image_tag("report.png", :alt => "rss feed") %>
+            <div class="landing-page-content-wrapper">
+                <h5>Write your own reports</h5>
+                <p>Become a news report and share your reliable stories</p>
+            </div>
+        </div>
+        <div class="col-lg-4 landing-page-text">
+            <%= image_tag("reporter.png", :alt => "rss feed") %>
+            <div class="landing-page-content-wrapper">
+                <h5>Follow your favourite reporters</h5>
+                <p>Keep up with your trusted news sources with our social media features</p>
+            </div>
+        </div>
+    </div>

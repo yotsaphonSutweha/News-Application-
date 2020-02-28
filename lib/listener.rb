@@ -19,7 +19,6 @@ class Observer
 end
 
 class Listener < Observer
-
     def initialize
         super()
     end
