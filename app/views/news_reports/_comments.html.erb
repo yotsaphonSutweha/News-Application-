@@ -11,7 +11,10 @@
                     <% elsif comment.sentiment == 'Neutral' %>
                         <p>Sentiment: &#128566;</p>
                     <% end %>
-                    <p>Posted by: <%= comment.createdby %></p>
+                    <p>By: <%= comment.createdby %></p>
+                    <% if comment.created_at %>
+                        <p><%= calculate_posted_hours(comment.created_at) %></p>
+                    <% end %>
                     <% if current_profile_id == comment.profile_id %>
                         <div class="row">
                             <div class="col-lg-2">

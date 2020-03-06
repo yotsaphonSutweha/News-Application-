@@ -13,7 +13,7 @@
                             %>
                             <% if news_report.createdby %>
                                 <footer class="blockquote-footer">
-                                    <cite><%= news_report.createdby %></cite>
+                                    <cite><%= news_report.createdby %> <%= calculate_posted_hours(news_report.created_at)%></cite>
                                 </footer>
                             <% end %>
                         </div>

@@ -2,6 +2,7 @@
 <div>
     <h3>Category: <%= @news_report.category %></h2>
     <h4>Written by: <%= @news_report.createdby %></h3>
+    <p><%= calculate_posted_hours(@news_report.created_at)%></p>
 </div>
 <div>
     <p>
