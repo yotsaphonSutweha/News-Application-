@@ -13,6 +13,6 @@ class FollowController < ApplicationController
         @listener.add_observer(@followee_number)
         @listener.add_observer(@followee)
         @listener.trigger_following(@follower_id, @followee_id)
-        redirect_to newswriters_url(@current_user), flash: { alert: "Follow suucessful" }
+        redirect_to newswriters_url(@current_user), flash: { alert: "Follow successful" }
     end
 end

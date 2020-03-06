@@ -25,7 +25,11 @@ class NewsReportsController < ApplicationController
     @profile =  @user.profile
     @current_user = User.find(session["warden.user.user.key"][0][0])
     @current_profile = @current_user.profile
-    @news_report = @current_profile.news_reports.build
+    if @current_profile.role == 'Reader'
+      redirect_to pages_home_url(), flash: { notice: "You do not have access to this functionality. Please sign up as a Writer!" }
+    else
+      @news_report = @current_profile.news_reports.build
+    end
   end
 
   def create 
@@ -35,23 +39,21 @@ class NewsReportsController < ApplicationController
     @current_user = User.find(session["warden.user.user.key"][0][0])
     @current_profile = @current_user.profile
     @createdby = @current_user.username
+    if @current_profile.role == 'Reader'
+      redirect_to pages_home_url(), flash: { notice: "You do not have access to this functionality. Please sign up as a Writer!" }
+    else
+      @title = params[:title]
+      @category = params[:category]
+      @content = params[:content]
 
-    @title = params[:title]
-    @category = params[:category]
-    @content = params[:content]
-
-    @news_report = @current_profile.news_reports.build(params.require(:news_report).permit(:title, :category, :content))
-    if SentimentAnalyzer.profaneWordsFilter(@news_report.title) == true && SentimentAnalyzer.profaneWordsFilter(@news_report.category) == true && SentimentAnalyzer.profaneWordsFilter(@news_report.content) == true
+      @news_report = @current_profile.news_reports.build(params.require(:news_report).permit(:title, :category, :content))
       @news_report.createdby = @createdby
       if @news_report.save
         redirect_to user_profile_news_report_url(@current_user.id, @current_profile.id, @news_report.id)
       else 
         render :action => "new"
       end
-    else 
-      redirect_to new_user_profile_news_report_url(@current_user.id, @current_profile), flash: { alert: "Offensive language is forbidden!" }
-    end
-     
+    end 
   end
 
   def edit
@@ -59,7 +61,11 @@ class NewsReportsController < ApplicationController
     @profile = @user.profile
     @current_user = User.find(session["warden.user.user.key"][0][0])
     @current_profile = @current_user.profile
-    @news_report = @current_profile.news_reports.find(params[:id])
+    if @current_profile.role == 'Reader'
+      redirect_to pages_home_url(), flash: { notice: "You do not have access to this functionality. Please sign up as a Writer!" }
+    else
+      @news_report = @current_profile.news_reports.find(params[:id])
+    end
   end
 
   def update 
@@ -70,13 +76,17 @@ class NewsReportsController < ApplicationController
     @title = params[:title]
     @category = params[:category]
     @content = params[:content]
-    @news_report = @current_profile.news_reports.find(params[:id])
-    @createdby = @news_report.createdby
-    if @news_report.update_attributes(params.require(:news_report).permit(:title, :category, :content))
-      @news_report.createdby = @createdby
-      redirect_to user_profile_news_report_url
-    else 
-      render :action => "edit"
+    if @current_profile.role == 'Reader'
+      redirect_to pages_home_url(), flash: { notice: "You do not have access to this functionality. Please sign up as a Writer!" }
+    else
+      @news_report = @current_profile.news_reports.find(params[:id])
+      @createdby = @news_report.createdby
+      if @news_report.update_attributes(params.require(:news_report).permit(:title, :category, :content))
+        @news_report.createdby = @createdby
+        redirect_to user_profile_news_report_url
+      else 
+        render :action => "edit"
+      end
     end
   end
 
@@ -84,10 +94,14 @@ class NewsReportsController < ApplicationController
     @user = User.find(params[:user_id])
     @profile = @user.profile
     @news_report = @profile.news_reports.find(params[:id])
-    @news_report.destroy
-    respond_to do |format|
-      format.html {redirect_to user_profile_news_reports_url }
-      format.xml { head :ok }
+    if @current_profile.role == 'Reader'
+      redirect_to pages_home_url(), flash: { notice: "You do not have access to this functionality. Please sign up as a Writer!" }
+    else
+      @news_report.destroy
+      respond_to do |format|
+        format.html {redirect_to user_profile_news_reports_url }
+        format.xml { head :ok }
+      end
     end
   end
 

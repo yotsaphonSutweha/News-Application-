@@ -1,7 +1,8 @@
-<h1 class="heading"><%= @user.username %></h1>
+<h1 class="heading">Username: <%= @user.username %></h1>
 <div>
-    <h4><%= @profile.fname %>   <%= @profile.sname %></h4>
-    <h5><%= @profile.role %></h5>
+    <h4>Name: <%= @profile.fname %>   <%= @profile.sname %></h4>
+    <h5>Role: <%= @profile.role %></h5>
+    <h6>Followers: <%= @profile.no_of_followers %></h6>
 </div>
 <div>
     <p>Bio:</p>

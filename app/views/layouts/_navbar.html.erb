@@ -14,12 +14,14 @@
         <li class="nav-item">
           <%= link_to "News reports", newsreports_url, :class => 'nav-link'%>
         </li>
-        <li class="nav-item">
-          <%= link_to "Your reports", user_profile_news_reports_url(current_user.id, current_user.profile.id), :class => 'nav-link'%>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Create reports",  new_user_profile_news_report_url(current_user.id, current_user.profile.id), :class => 'nav-link'%>
-        </li>
+        <% if current_user.profile.role == 'Writer'%>
+          <li class="nav-item">
+            <%= link_to "Your reports", user_profile_news_reports_url(current_user.id, current_user.profile.id), :class => 'nav-link'%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Create reports",  new_user_profile_news_report_url(current_user.id, current_user.profile.id), :class => 'nav-link'%>
+          </li>
+        <% end %>
         <li class="nav-item">
           <%= link_to "News Writers", newswriters_url, :class => 'nav-link'%>
         </li>

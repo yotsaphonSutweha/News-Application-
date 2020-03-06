@@ -29,15 +29,11 @@ class ProfilesController < ApplicationController
   def create 
     @user = User.find(params[:user_id])
     @profile = @user.build_profile(params.require(:profile).permit(:fname, :sname, :bio, :role))
-    if SentimentAnalyzer.profaneWordsFilter(@profile.fname) == true && SentimentAnalyzer.profaneWordsFilter(@profile.sname) == true && SentimentAnalyzer.profaneWordsFilter(@profile.bio) == true
-      @profile.no_of_followers = 0
-      if @profile.save
-        redirect_to user_profiles_url(@user)
-      else 
-        render :action => "new"
-      end
+    @profile.no_of_followers = 0
+    if @profile.save
+      redirect_to user_profiles_url(@user)
     else 
-      redirect_to new_user_profile_url(@user), flash: { alert: "Offensive language is forbidden!" }
+      render :action => "new"
     end
   end
 
