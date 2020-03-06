@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag 'style' %>
-<div class="container"> 
-  <h1 class="heading">Breaking news</h1>
+<div class="container heading"> 
   <div>
     <%= form_tag(search_url, method: 'get', class: 'form') do %>
       <div class="form-row">
@@ -16,7 +15,7 @@
 
   <div>
     <% if @previous_search %>
-        <h3>Becuase you viewed: <%= @previous_search %> </h3>
+        <h3 class="heading">Becuase you viewed: <%= @previous_search %> </h3>
         <% if @recommended_news["newsApiRecommendationResponse"]["articles"].blank? %>
           <p>Sorry! No recommendations. Please search for other news or check your search term again.</p>
         <% else %>
@@ -27,7 +26,7 @@
     <% end %>
   </div>
 
-  <h3>Daily news</h3>
+  <h3 class="heading">Breaking news</h3>
   
   <% @news["newsApiResponse"]["articles"].each do |content| %>
     <%= render partial: 'news_api', locals:{content: content}%>
