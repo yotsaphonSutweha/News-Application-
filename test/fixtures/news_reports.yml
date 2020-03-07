@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  category: MyString
-  content: MyString
-  profile: one
+news_report_one:
+  title: Football
+  category: Sport
+  content: Football is also known as soccer
 
-two:
-  title: MyString
-  category: MyString
-  content: MyString
-  profile: two
+news_report_two:
+  title: What is Lorem Ipsum?
+  category: Politics
+  content: Contrary to popular belief, Lorem Ipsum is not simply random text. 

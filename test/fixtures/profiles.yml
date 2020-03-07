@@ -1,13 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  fname: MyString
-  sname: MyString
-  bio: MyString
-  role: MyString
+profile_reader:
+  fname: yotsaphon
+  sname: sutweha
+  bio: i am a news reader
+  role: Reader
+  no_of_followers: 0
 
-two:
-  fname: MyString
-  sname: MyString
-  bio: MyString
-  role: MyString
+
+profile_writer:
+  fname: yotsaphon
+  sname: sutweha
+  bio: i am a news writer
+  role: Writer
+  no_of_followers: 0
+
+not_zero_number_of_followers:
+    no_of_followers: 1
