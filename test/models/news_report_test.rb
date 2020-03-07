@@ -8,6 +8,7 @@ class NewsReportTest < ActiveSupport::TestCase
     @user.save
 
     @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+    @profile.save
 
     @news_report = NewsReport.new(title: news_reports(:news_report_one).title, category: news_reports(:news_report_one).category, content: news_reports(:news_report_one).content, profile: @profile)
 
@@ -27,6 +28,7 @@ class NewsReportTest < ActiveSupport::TestCase
     @user.save
 
     @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+    @profile.save
 
     @news_report = NewsReport.new(title: '', category: news_reports(:news_report_one).category, content: news_reports(:news_report_one).content, profile: @profile)
 
@@ -39,6 +41,7 @@ class NewsReportTest < ActiveSupport::TestCase
     @user.save
 
     @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+    @profile.save
 
     @news_report = NewsReport.new(title: news_reports(:news_report_one).title, category: '', content: news_reports(:news_report_one).content, profile: @profile)
 
@@ -50,6 +53,7 @@ class NewsReportTest < ActiveSupport::TestCase
     @user.save
 
     @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+    @profile.save
 
     @news_report = NewsReport.new(title: news_reports(:news_report_one).title, category: news_reports(:news_report_one).category, content: '', profile: @profile)
 
@@ -64,6 +68,7 @@ class NewsReportTest < ActiveSupport::TestCase
     @user.save
 
     @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+    @profile.save
 
     @news_report = NewsReport.new(title: @test_title, category: news_reports(:news_report_one).category, content: '', profile: @profile)
 

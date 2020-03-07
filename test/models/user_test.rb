@@ -3,10 +3,10 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   # Happy path
-  # test "Should save the user with username, email and password with correct password and email format" do
-  #   @user = users(:user_one)
-  #   assert @user.save
-  # end
+  test "Should save the user with username, email and password with correct password and email format" do
+    @user = users(:user_one)
+    assert @user.save
+  end
 
   # End of Happy path
 

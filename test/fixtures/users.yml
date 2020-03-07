@@ -6,7 +6,6 @@ user_one:
   encrypted_password: asd45rty
 
 user_two:
-  username: 
   email: yo@1gmail.com
   encrypted_password: asd45rty1
 
