@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  comment: MyString
-  createdby: MyString
-  sentiment: MyString
-  profile: one
+comment_one:
+  comment: This is good
+  createdby: Yo
+  sentiment: Positive
 
-two:
-  comment: MyString
-  createdby: MyString
-  sentiment: MyString
-  profile: two
+
+comment_two:
+  comment: This is bad
+  createdby: Yo
+  sentiment: Negative
+

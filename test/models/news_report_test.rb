@@ -2,16 +2,72 @@ require 'test_helper'
 
 class NewsReportTest < ActiveSupport::TestCase
 
-  
-  # test "should save the report" do 
-  #   user = User.new(username: "Yo", email: "yo@gmail.com", password: "asd45rty")
-  #   user.save
+  # Happy path
+  test "Should save the report owned by a profile" do 
+    @user = User.new(username: users(:user_one).username, email: users(:user_one).email, encrypted_password: users(:user_one).encrypted_password)
+    @user.save
 
-  #   profile = Profile.new(fname: "yotsaphons", sname: "sutweha", bio: "i am a news writer", role: "news writer", user: user)
+    @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
 
-  #   report = NewsReport.new(title: "Football", category: "Sport", content: "Football is also known as soccer", profile: profile)
-  #   assert report.save
-  # end
+    @news_report = NewsReport.new(title: news_reports(:news_report_one).title, category: news_reports(:news_report_one).category, content: news_reports(:news_report_one).content, profile: @profile)
+
+    assert @news_report.save
+  end
+  # End of Happy path
+
+  # Unhappy path
+  test "Should not save the report without profile" do 
+    @news_report = NewsReport.new(title: news_reports(:news_report_one).title, category: news_reports(:news_report_one).category, content: news_reports(:news_report_one).content, profile: nil)
+
+    assert_not @news_report.save
+  end
+
+  test "Should not save the report without a title" do 
+    @user = User.new(username: users(:user_one).username, email: users(:user_one).email, encrypted_password: users(:user_one).encrypted_password)
+    @user.save
+
+    @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+
+    @news_report = NewsReport.new(title: '', category: news_reports(:news_report_one).category, content: news_reports(:news_report_one).content, profile: @profile)
+
+    assert_not @news_report.save
+  end
 
 
+  test "Should not save the report without a category" do 
+    @user = User.new(username: users(:user_one).username, email: users(:user_one).email, encrypted_password: users(:user_one).encrypted_password)
+    @user.save
+
+    @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+
+    @news_report = NewsReport.new(title: news_reports(:news_report_one).title, category: '', content: news_reports(:news_report_one).content, profile: @profile)
+
+    assert_not @news_report.save
+  end
+
+  test "Should not save the report without content" do 
+    @user = User.new(username: users(:user_one).username, email: users(:user_one).email, encrypted_password: users(:user_one).encrypted_password)
+    @user.save
+
+    @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+
+    @news_report = NewsReport.new(title: news_reports(:news_report_one).title, category: news_reports(:news_report_one).category, content: '', profile: @profile)
+
+    assert_not @news_report.save
+  end
+
+  test "Should not save the report with a title that has more than 100 characters" do 
+
+    @test_title = (0...1001).map { ('a'..'z').to_a[rand(26)] }.join
+
+    @user = User.new(username: users(:user_one).username, email: users(:user_one).email, encrypted_password: users(:user_one).encrypted_password)
+    @user.save
+
+    @profile = Profile.new(fname: profiles(:profile_writer).fname, sname: profiles(:profile_writer).sname, bio: profiles(:profile_writer).bio, role: profiles(:profile_writer).role, no_of_followers: profiles(:profile_writer).no_of_followers, user: @user)
+
+    @news_report = NewsReport.new(title: @test_title, category: news_reports(:news_report_one).category, content: '', profile: @profile)
+
+    assert_not @news_report.save
+  end
+  # End of Unhappy path
 end
