@@ -4,11 +4,22 @@ user_one:
   username: Yo
   email: yo@gmail.com
   encrypted_password: asd45rty
+  
 
 user_two:
   username: 
   email: yo@1gmail.com
   encrypted_password: asd45rty1
+
+user_three:
+  username: bob
+  email: bob@gmail.com
+  encrypted_password: asd45rty12
+
+user_four: 
+  username: hey
+  email: hey@gmail.com
+  encrypted_password: asd45rty123
 
   
 

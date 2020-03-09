@@ -17,3 +17,11 @@ profile_writer:
 
 not_zero_number_of_followers:
     no_of_followers: 1
+
+profile_writer_for_update:
+  fname: aof
+  sname: don
+  bio: hello world
+  role: Writer
+  no_of_followers: 0
+

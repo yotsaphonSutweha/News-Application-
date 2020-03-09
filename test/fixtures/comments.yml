@@ -11,3 +11,17 @@ comment_two:
   createdby: Yo
   sentiment: Negative
 
+comment_three:
+  comment: This is nice
+  createdby: Yo
+  sentiment: Positive
+
+comment_four:
+  comment: This is a book
+  createdby: Yo
+  sentiment: Neutral
+
+
+bad_comment:
+  comment: This is shit
+
