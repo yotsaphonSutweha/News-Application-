@@ -31,6 +31,4 @@ class FollowControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to pages_home_url()
     end
     # End of Unhappy paths
-
-    
 end

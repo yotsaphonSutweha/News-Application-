@@ -6,7 +6,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   # end
 
   # test "should get index" do
-  #   get users_url
+  #   get new_user_registration_url()
   #   assert_response :success
   # end
 
