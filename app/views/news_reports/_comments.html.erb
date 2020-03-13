@@ -3,7 +3,7 @@
         <div class="comment-section">
             <div class="card comment-cards">
                 <div class="card-body">
-                    <p><%= comment.comment %></p>
+                    <p class="comment"><%= comment.comment %></p>
                     <% if comment.sentiment == 'Positive'%>
                         <p>Sentiment: &#128516;</p>
                     <% elsif comment.sentiment == 'Negative' %>
@@ -11,7 +11,7 @@
                     <% elsif comment.sentiment == 'Neutral' %>
                         <p>Sentiment: &#128566;</p>
                     <% end %>
-                    <p>By: <%= comment.createdby %></p>
+                    <p class="createdby">By: <%= comment.createdby %></p>
                     <% if comment.created_at %>
                         <p><%= calculate_posted_hours(comment.created_at) %></p>
                     <% end %>

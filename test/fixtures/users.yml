@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 user_one:
-  username: Yo
-  email: yo@gmail.com
+  username: Yo12345
+  email: yo12345@gmail.com
   encrypted_password: asd45rty
   
 

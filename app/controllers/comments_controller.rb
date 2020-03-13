@@ -23,36 +23,50 @@ class CommentsController < ApplicationController
     @user = User.find(params[:user_id]) # this references the user that owns the news report
     @profile = @user.profile
     @username = @user.username 
+
+    @current_user = User.find(session["warden.user.user.key"][0][0])
+    @current_profile = @current_user.profile
+
     @news_report = NewsReport.find(params[:news_report_id])
     @user_comment = params[:user_comment]
-    if SentimentAnalyzer.profaneWordsFilter(@user_comment) == true # means the content is clean
-      @sentiment = SentimentAnalyzer.commentSentimentAnalyzer(@user_comment)
-      @comment = Comment.new(comment: @user_comment, createdby: @username, sentiment:  @sentiment, profile: @profile, news_report: @news_report)
-      if @comment.save 
-        redirect_to user_profile_news_report_url(@user, @profile, @news_report)
-      else
-        redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { notice: "Cannot create comment due to internal error" }
-      end
+    if @user_comment == ''
+      redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { notice: "Please do not leave the comment field blank" }
     else 
-      redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { alert: "Offensive language is forbidden!" }
+      if SentimentAnalyzer.profaneWordsFilter(@user_comment) == true # means the content is clean
+        @sentiment = SentimentAnalyzer.commentSentimentAnalyzer(@user_comment)
+        @comment = Comment.new(comment: @user_comment, createdby: @current_user.username, sentiment: @sentiment, profile: @current_profile, news_report: @news_report)
+        if @comment.save 
+          redirect_to user_profile_news_report_url(@user, @profile, @news_report)
+        else
+          redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { notice: "Cannot create comment due to internal error" }
+        end
+      else 
+        redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { alert: "Offensive language is forbidden!" }
+      end
     end
   end
 
   def update
     @user = User.find(params[:user_id])
     @profile = @user.profile
+    @current_user = User.find(session["warden.user.user.key"][0][0])
+    @current_profile = @current_user.profile
     @news_report = NewsReport.find(params[:news_report_id])
     @comment = @news_report.comments.find(params[:id])
     @user_comment = params[:user_comment]
-    if SentimentAnalyzer.profaneWordsFilter(@user_comment) == true
-      @sentiment = SentimentAnalyzer.commentSentimentAnalyzer(@user_comment)
-      if @comment.update(comment: @user_comment, sentiment: @sentiment)
-        redirect_to user_profile_news_report_url(@user, @profile, @news_report)
-      else 
-        redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { notice: "Cannot update comment due to internal error" }
-      end 
+    if @user_comment == ''
+      redirect_to edit_user_profile_news_report_comment_url(@user, @profile, @news_report, @comment), flash: { notice: "Please do not leave the comment field blank" }
     else
-      redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { alert: "Offensive language is forbidden!" }
+      if SentimentAnalyzer.profaneWordsFilter(@user_comment) == true
+        @sentiment = SentimentAnalyzer.commentSentimentAnalyzer(@user_comment)
+        if @comment.update(comment: @user_comment, sentiment: @sentiment)
+          redirect_to user_profile_news_report_url(@user, @profile, @news_report)
+        else 
+          redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { notice: "Cannot update comment due to internal error" }
+        end 
+      else
+        redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { alert: "Offensive language is forbidden!" }
+      end
     end
   end
 end

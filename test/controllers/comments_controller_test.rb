@@ -8,13 +8,17 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     @report_two = news_reports(:news_report_two)
     @profile_writer.news_reports = [@report_one,  @report_two]
     @user_one.profile = @profile_writer
-    
+    @user_two = users(:user_two)
+    @profile_reader = profiles(:profile_reader)
+    @user_two.profile = @profile_reader
+    sign_in @user_one
     post user_profile_news_report_comments_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id), params: {
       user_comment: comments(:comment_one).comment
     }
   end
 
   teardown do 
+    @user_two = nil
     @user_one = nil 
     @profile_writer = nil
     @report_one = nil
@@ -64,7 +68,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
           user_comment: ''
       }
     end
-    assert_redirected_to user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id)
+    assert_redirected_to edit_user_profile_news_report_comment_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id, @user_one.profile.news_reports[1].comments[0].id)
   end
 
   test "should not create a comment if it contains cursing words" do
@@ -84,6 +88,5 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id)
   end
-
   # End of Unhappy paths
 end

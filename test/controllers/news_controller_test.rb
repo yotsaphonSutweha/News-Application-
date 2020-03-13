@@ -25,9 +25,9 @@ class NewsControllerTest < ActionDispatch::IntegrationTest
     #     get search_url(), params: {search_value: @search_value}
     #     assert_response :success
     # end
-    # End of Happy paths
+    # # End of Happy paths
 
-    # Unhappy paths
+    # # Unhappy paths
     # test "should not get get_news if not signed in" do
     #     get news_url()
     #     assert_redirected_to pages_home_url()
