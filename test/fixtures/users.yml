@@ -21,5 +21,10 @@ user_four:
   email: hey@gmail.com
   encrypted_password: asd45rty123
 
+user_five: 
+  username: aof
+  email: aoft@gmail.com
+  encrypted_password: asd45rty123
+
   
 

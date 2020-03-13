@@ -129,7 +129,7 @@ class NewsReportsWorkFlowTest < ActionDispatch::IntegrationTest
     end
 
     test "The user with reader-type profile tries to access the create news report page and receives an error message saying -> You do not have access to this page" do
-        
+
     end
     # End of Unhappy paths
 
@@ -139,5 +139,6 @@ class NewsReportsWorkFlowTest < ActionDispatch::IntegrationTest
         @user_two = nil
         @profile_two = nil
         @report_two = nil
+        @profile = nil
     end
 end

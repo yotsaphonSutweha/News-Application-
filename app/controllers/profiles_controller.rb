@@ -65,7 +65,7 @@ class ProfilesController < ApplicationController
       if @current_profile.update_attributes(params.require(:profile).permit(:fname, :sname, :bio))
         redirect_to user_profiles_url(@current_user, @current_profile)
       else 
-        redirect_to edit_user_profile_url(@current_user, @current_profile), flash: { alert: "Cannot update profile details due to internal error" }
+        redirect_to edit_user_profile_url(@current_user, @current_profile), flash: { alert: "Cannot update profile details due to internal error." }
       end
     rescue => exception 
       redirect_to pages_home_url, flash: { alert: "Please Sign-In" }

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommentingOnNewsReportWorkFlowTest < ActionDispatch::IntegrationTest
     setup do 
-        # Prepare a user without a profile
+        # Prepare a user with a profile
         @user_one = users(:user_four)
         @profile_one = profiles(:profile_writer_for_update)
         @user_one.profile = @profile_one
@@ -357,6 +357,7 @@ class CommentingOnNewsReportWorkFlowTest < ActionDispatch::IntegrationTest
         @user_one = nil
         @report_one = nil
         @user_two = nil
+        @profile_one = nil
         @profile_two = nil
         @report_two = nil
         @user_three = nil
