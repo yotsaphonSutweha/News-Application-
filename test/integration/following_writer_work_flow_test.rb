@@ -8,7 +8,7 @@ class FollowingWriterWorkFlowTest < ActionDispatch::IntegrationTest
         @user_one.profile = @profile_one
 
         # Prepare a user with profile and a report
-        @user_two = users(:user_two)
+        @user_two = users(:user_three)
         @profile_two = profiles(:profile_writer)
         @report_two = news_reports(:news_report_two)
         @profile_two.news_reports = [@report_two]
@@ -22,8 +22,8 @@ class FollowingWriterWorkFlowTest < ActionDispatch::IntegrationTest
         get newswriters_url()
         assert_response :success
         # The user should sees two profiles, one for him/herself and another one for the other user.
-        assert_select "h5.card-title", "#{@user_one.profile.fname}  #{@user_one.profile.sname}"
-        assert_select "h5.card-title", "#{@user_two.profile.fname}  #{@user_two.profile.sname}"
+        assert_select "h5.card-title", "Username: #{@user_one.username}"
+        assert_select "h5.card-title", "Username: #{@user_two.username}"
         # The user can see the follow button. The user clicks on the follow button.
         assert_select "a", "Follow"
         get follow_url(), params: {following_id: @user_two.profile.id}
