@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_09_173535) do
+ActiveRecord::Schema.define(version: 2020_03_23_135359) do
 
   create_table "comments", force: :cascade do |t|
     t.string "comment"
@@ -43,17 +43,6 @@ ActiveRecord::Schema.define(version: 2020_03_09_173535) do
     t.integer "comments_id"
     t.index ["comments_id"], name: "index_news_reports_on_comments_id"
     t.index ["profile_id"], name: "index_news_reports_on_profile_id"
-  end
-
-  create_table "news_writers", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
-    t.string "firstName"
-    t.string "secondName"
-    t.string "bio"
-    t.string "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|

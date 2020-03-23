@@ -27,7 +27,7 @@ class BrowseBreakingNewsWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "div.card" # Each card displays news from the two APIs. If the card exists, it means that the APIs successfully deliver the content.
     end
 
-    test "The user search for particular topic for the news" do 
+    test "The user search for a particular news" do 
         # Sign in
         sign_in @user_one
         # The user acceses the breaking news page and should see the search bar 

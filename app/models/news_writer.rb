@@ -1,2 +1,0 @@
-class NewsWriter < ApplicationRecord
-end
