@@ -4,7 +4,7 @@ class Comments < ActiveRecord::Migration[5.2]
       t.string :comment
       t.string :createdby
       t.string :sentiment
-      t.references :profile, foreign_key: true
+      # t.references :profile, foreign_key: true
       t.references :news_report, foreign_key: true
     end
   end

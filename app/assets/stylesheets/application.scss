@@ -56,19 +56,27 @@ a:hover {
     border-radius: 10px;
     border-color: #ffdb58;
     a {
-        color:  #ffdb58;
+        color:  #ff413b;
     }
     a:hover {
-        color: #ff413b;
+        color: #ffdb58;
+        border-color: #ff413b;
     }
 }
+
+
 .btn-primary {
+    background-color: #ffdb58;
+    border-color: #ffdb58;
+    color: #ff413b;
+}
+
+.btn-primary:hover {
     background-color: #ff413b;
     border-color: #ff413b;
-    :hover {
-        color: #ff413b;
-    }
+    color: #ffdb58;
 }
+
 
 .heading {
     padding-top: 50px;
@@ -125,4 +133,6 @@ a:hover {
 .landing-page-content-wrapper {
     margin-top: 40px;
 }
+
+
 
