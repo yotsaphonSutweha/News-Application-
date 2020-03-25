@@ -71,7 +71,7 @@ class NewsReportControllerTest < ActionDispatch::IntegrationTest
   test "should update the existing report" do 
     sign_in @user_one
     assert_no_difference("@user_one.profile.news_reports.count") do 
-      patch user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[0].id), params: {news_report: {title: 'hey',category: 'hey', content: 'hey'}}
+      put user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[0].id), params: {news_report: {title: 'hey',category: 'hey', content: 'hey'}}
     end
     assert_redirected_to user_profile_news_report_url(@user_one.id,  @user_one.profile.id, @user_one.profile.news_reports[0].id)
   end
@@ -121,7 +121,7 @@ class NewsReportControllerTest < ActionDispatch::IntegrationTest
 
   test "should not update the existing report if not signed in" do 
     assert_no_difference("@user_one.profile.news_reports.count") do 
-      patch user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[0].id), params: {news_report: {title: 'hey',category: 'hey', content: 'hey'}}
+      put user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[0].id), params: {news_report: {title: 'hey',category: 'hey', content: 'hey'}}
     end
     assert_redirected_to pages_home_url()
   end
@@ -150,7 +150,7 @@ class NewsReportControllerTest < ActionDispatch::IntegrationTest
   test "should redirect to edit page if record is not updated" do 
     sign_in @user_one
     assert_no_difference("@user_one.profile.news_reports.count") do 
-      patch user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[0].id), params: {news_report: {title: 'hey',category: nil, content: nil}}
+      put user_profile_news_report_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[0].id), params: {news_report: {title: 'hey',category: nil, content: nil}}
     end
     assert_redirected_to edit_user_profile_news_report_url(@user_one.id,  @user_one.profile.id, @user_one.profile.news_reports[0].id)
   end

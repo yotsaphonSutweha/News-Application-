@@ -73,7 +73,7 @@ class CommentingOnNewsReportWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "div.comment-input-section", 1
         # The user edit the comment and preses the comment button
         assert_no_difference("@user_two.profile.news_reports[0].comments.count") do 
-            patch user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
+            put user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
                 user_comment: @comment_two
             }
         end
@@ -165,7 +165,7 @@ class CommentingOnNewsReportWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "div.comment-input-section", 1
         # The user edit the comment and preses the comment button
         assert_no_difference("@user_two.profile.news_reports[0].comments.count") do 
-            patch user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
+            put user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
                 user_comment: @comment_two
             }
         end
@@ -258,7 +258,7 @@ class CommentingOnNewsReportWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "div.comment-input-section", 1
         # The user clicks on the comment button but leaves the field blank. 
         assert_no_difference("@user_two.profile.news_reports[0].comments.count") do 
-            patch user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
+            put user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
                 user_comment: ''
             }
         end
@@ -317,7 +317,7 @@ class CommentingOnNewsReportWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "div.comment-input-section", 1
         # The user clicks on the comment button but leaves the field blank. 
         assert_no_difference("@user_two.profile.news_reports[0].comments.count") do 
-            patch user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
+            put user_profile_news_report_comment_url(@user_two.id, @user_two.profile.id, @user_two.profile.news_reports[0].id, @user_two.profile.news_reports[0].comments[0].id), params: {
                 user_comment: ''
             }
         end

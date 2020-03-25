@@ -56,7 +56,7 @@ class NewsReportsWorkFlowTest < ActionDispatch::IntegrationTest
 
         # The user updates the information. Once successfully edited, the user is brought back to the news reports page.
         assert_no_difference("@user_two.profile.news_reports.count") do 
-            patch user_profile_news_report_url(@user_two.id, @user_two.profile.id), params: {news_report: {title: @report_one.title, category: @report_one.category, content: @report_one.content}}
+            put user_profile_news_report_url(@user_two.id, @user_two.profile.id), params: {news_report: {title: @report_one.title, category: @report_one.category, content: @report_one.content}}
         end
         assert_redirected_to user_profile_news_report_url(@user_two.id,  @user_two.profile.id, @user_two.profile.news_reports[0].id)
 
@@ -119,7 +119,7 @@ class NewsReportsWorkFlowTest < ActionDispatch::IntegrationTest
 
         # The user leaves any of the fields blank 
         assert_no_difference("@user_two.profile.news_reports.count") do 
-            patch user_profile_news_report_url(@user_two.id, @user_two.profile.id), params: {news_report: {title: @report_one.title, category: nil, content: nil}}
+            put user_profile_news_report_url(@user_two.id, @user_two.profile.id), params: {news_report: {title: @report_one.title, category: nil, content: nil}}
         end
          # The user should be on the same page and receive the error message at the top saying "Please do not leave the fields blank"
         assert_redirected_to edit_user_profile_news_report_url(@user_two.id,  @user_two.profile.id)

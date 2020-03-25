@@ -37,7 +37,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update an existing comment" do
     assert_no_difference("@user_one.profile.news_reports[1].comments.count") do 
-      patch user_profile_news_report_comment_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id, @user_one.profile.news_reports[1].comments[0].id), params: {
+      put user_profile_news_report_comment_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id, @user_one.profile.news_reports[1].comments[0].id), params: {
           user_comment: comments(:comment_two).comment
       }
     end
@@ -64,7 +64,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not update an existing comment if there is an internal server error" do
     assert_no_difference("@user_one.profile.news_reports[1].comments.count") do 
-      patch user_profile_news_report_comment_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id, @user_one.profile.news_reports[1].comments[0].id), params: {
+      put user_profile_news_report_comment_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id, @user_one.profile.news_reports[1].comments[0].id), params: {
           user_comment: ''
       }
     end
@@ -82,7 +82,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not update an existing comment if it contains cursing words" do
     assert_no_difference("@user_one.profile.news_reports[1].comments.count") do 
-      patch user_profile_news_report_comment_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id, @user_one.profile.news_reports[1].comments[0].id), params: {
+      put user_profile_news_report_comment_url(@user_one.id, @user_one.profile.id, @user_one.profile.news_reports[1].id, @user_one.profile.news_reports[1].comments[0].id), params: {
           user_comment: comments(:bad_comment).comment
       }
     end

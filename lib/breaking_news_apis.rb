@@ -25,7 +25,7 @@ class BreakingNewsApis
             'country=us&'\
             'apiKey=1eaff84b12f24c50a65899494f406fb3'
         end
-        @req = open(@uri)
+        @req = URI.open(@uri)
         @responseBody = @req.read
         @responseBody = JSON.parse(@responseBody)
         return @responseBody
@@ -37,7 +37,7 @@ class BreakingNewsApis
         else
             @uri = 'https://content.guardianapis.com/search?api-key=57c2ae96-8445-4f4a-b561-cfa25ca203f1'
         end
-        @req = open(@uri)
+        @req = URI.open(@uri)
         @responseBody = @req.read
         @responseBody = JSON.parse(@responseBody)
         return @responseBody
@@ -46,7 +46,7 @@ class BreakingNewsApis
     def calling_news_api_recommendation(searchValue)
         if searchValue != nil
             @uri = 'https://newsapi.org/v2/top-headlines?source=bbc-news&pageSize=5&q=' + searchValue + '&apiKey=1eaff84b12f24c50a65899494f406fb3'
-            @req = open(@uri)
+            @req = URI.open(@uri)
             @responseBody = @req.read
             @responseBody = JSON.parse(@responseBody)
             return @responseBody

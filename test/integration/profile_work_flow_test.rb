@@ -62,7 +62,7 @@ class ProfileWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "form", 1
         # The user makes changes to their profile information and preseses edit and is brought back to the profile page with updated information
         assert_no_difference("Profile.count") do 
-            patch user_profile_url(@user_three.id, @user_three.profile.id), params: { profile: { fname: "Yotsss", sname: "Sutweha", bio: "This is bio" } }
+            put user_profile_url(@user_three.id, @user_three.profile.id), params: { profile: { fname: "Yotsss", sname: "Sutweha", bio: "This is bio" } }
         end
         assert_redirected_to user_profiles_url(@user_three, @user_three.profile)
         get user_profiles_url(@user_three, @user_three.profile)
@@ -117,7 +117,7 @@ class ProfileWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "form", 1
         # The user makes changes to their profile information and preseses edit and is brought back to the profile page with updated information
         assert_no_difference("Profile.count") do 
-            patch user_profile_url(@user_four.id, @user_four.profile.id), params: { profile: { fname: "Hey", sname: "Heyyo", bio: "This is hey" } }
+            put user_profile_url(@user_four.id, @user_four.profile.id), params: { profile: { fname: "Hey", sname: "Heyyo", bio: "This is hey" } }
         end
         assert_redirected_to user_profiles_url(@user_four, @user_four.profile)
         get user_profiles_url(@user_four, @user_four.profile)
@@ -170,7 +170,7 @@ class ProfileWorkFlowTest < ActionDispatch::IntegrationTest
         assert_select "form", 1
         # TThe user leaves some of the input fields blank and presses edit
         assert_no_difference("Profile.count") do 
-            patch user_profile_url(@user_three.id, @user_three.profile.id), params: { profile: { fname: "", sname: "", bio: "This is bio" } }
+            put user_profile_url(@user_three.id, @user_three.profile.id), params: { profile: { fname: "", sname: "", bio: "This is bio" } }
         end
         # The user stays on the same page and should see the notification
         assert_redirected_to edit_user_profile_url(@user_three, @user_three.profile)

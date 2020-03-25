@@ -46,7 +46,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
   test "should update the existing profile" do
     sign_in @user_one
     assert_no_difference("Profile.count") do 
-      patch user_profile_url(@user_one.id, @user_one.profile.id), params: { profile: { fname: "Yotsss", sname: "Sutweha", bio: "I am koolest" } }
+      put user_profile_url(@user_one.id, @user_one.profile.id), params: { profile: { fname: "Yotsss", sname: "Sutweha", bio: "I am koolest" } }
     end
     assert_redirected_to user_profiles_url(@user_one, @profile)
   end
@@ -78,7 +78,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
   test "should redirect to edit page if record is not updated" do 
     sign_in @user_one
     assert_no_difference("Profile.count") do 
-      patch user_profile_url(@user_one.id, @user_one.profile.id), params: { profile: { fname: "Yotsss", sname: "Sutweha", bio: nil} }
+      put user_profile_url(@user_one.id, @user_one.profile.id), params: { profile: { fname: "Yotsss", sname: "Sutweha", bio: nil} }
     end
     assert_redirected_to(edit_user_profile_url(@user_one.id, @user_one.profile.id))
   end
