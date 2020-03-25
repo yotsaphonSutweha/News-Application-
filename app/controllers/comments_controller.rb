@@ -4,8 +4,7 @@ class CommentsController < ApplicationController
 
   SentimentAnalyzer.setFilePath(Rails.root.join('lib/word_bank/words.json'))
   SentimentAnalyzer.loadProfaneWords(Rails.root.join('lib/word_bank/bad-words.csv'))
-
-
+  
   def destroy
     @user = User.find(params[:user_id])
     @profile = @user.profile

@@ -10,7 +10,9 @@
                     </div>
                     <div class="col-md-8"> 
                         <div class="card-body">
-                            <h5 class="card-title"><b>Username:</b> <%= profile.user.username %></h5>
+                            <% if profile.user %>
+                                <h5 class="card-title"><b>Username:</b> <%= profile.user.username %></h5>
+                            <% end %>
                             <h6 class="card-subtitle"><b>Role:</b> <%= profile.role %></h6><br/>
                             <p>Followers: <%= profile.no_of_followers %></p>
                             <p><%= profile.bio %></p>

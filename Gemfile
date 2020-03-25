@@ -77,6 +77,7 @@ gem 'devise'
 
 gem 'devise-bootstrap-views', '~> 1.0'
 
+#Custom gem 
 gem 'sentimentanalyzer', '~> 0.1.3'
 
 gem 'activerecord-session_store'
