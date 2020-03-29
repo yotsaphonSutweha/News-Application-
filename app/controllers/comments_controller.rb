@@ -2,6 +2,7 @@ require('sentimentanalyzer')
 
 class CommentsController < ApplicationController
 
+  # Loads the word banks for the analyzer
   SentimentAnalyzer.setFilePath(Rails.root.join('lib/word_bank/words.json'))
   SentimentAnalyzer.loadProfaneWords(Rails.root.join('lib/word_bank/bad-words.csv'))
   
@@ -9,6 +10,7 @@ class CommentsController < ApplicationController
     @user = User.find(params[:user_id])
     @profile = @user.profile
     @news_report = NewsReport.find(params[:news_report_id])
+    # Find the comment that is being destroyed using the id
     @comment = Comment.find(params[:id])
     @comment.destroy
     respond_to do |format|
@@ -23,6 +25,7 @@ class CommentsController < ApplicationController
     @profile = @user.profile
     @username = @user.username 
 
+    # The current user represents the user who is logged in, to find the user ID in the session we use "session["warden.user.user.key"][0][0]"
     @current_user = User.find(session["warden.user.user.key"][0][0])
     @current_profile = @current_user.profile
 
@@ -31,7 +34,8 @@ class CommentsController < ApplicationController
     if @user_comment == ''
       redirect_to user_profile_news_report_url(@user, @profile, @news_report), flash: { notice: "Please do not leave the comment field blank" }
     else 
-      if SentimentAnalyzer.profaneWordsFilter(@user_comment) == true # means the content is clean
+      if SentimentAnalyzer.profaneWordsFilter(@user_comment) == true # means the content is clean, containing no cursing words
+        # Use the analyzer to determine the sentiment of the comment
         @sentiment = SentimentAnalyzer.commentSentimentAnalyzer(@user_comment)
         @comment = Comment.new(comment: @user_comment, createdby: @current_user.username, sentiment: @sentiment, profile: @current_profile, news_report: @news_report)
         if @comment.save 

@@ -7,5 +7,6 @@ class ActiveSupport::TestCase
   fixtures :all
  
   # Add more helper methods to be used by all tests here...
+  # Include Devise to manage the user's session for test cases
   include Devise::Test::IntegrationHelpers
 end

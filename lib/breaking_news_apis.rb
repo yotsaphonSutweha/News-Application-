@@ -4,6 +4,7 @@ require 'singleton'
 
 class BreakingNewsApis
     
+    # Making this class Singleton
     include Singleton
 
     def initialize()
